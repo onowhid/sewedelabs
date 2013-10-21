@@ -1,17 +1,21 @@
 <?php
 
-//	contrroller
+//	controller
 
 	require_once("../classes/class.Authentication.php");
+	require_once("../classes/class.Session.php");
 
-	session_start();
+	$Session = new TSession();
+	$Authentication = new TAuthentication();
 
-	if ($_SESSION['LoggedIn'] == 1) {
+	$_SESSION['LoggedIn'] = 0;	
+
+	if ($Authentication->isAuthorized) {
 		// logged in
-		echo "You are logged in";
+		echo "You are logged in <br>";
 	}
 	else {
-		
+		echo "You are not logged in <br>";
 		if ($_POST['submit'] == 'Submit') {
 			// they submitted the login form		
 
